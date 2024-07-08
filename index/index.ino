@@ -13,7 +13,7 @@
 // Pin definitions
 const int MG811_PIN = 34;   // Analog input pin for MG811 sensor
 const int MQ4_PIN = 35;     // Analog input pin for MQ-4 sensor
-const int MQ7_PIN = 36;     // Analog input pin for MQ-7 sensor
+const int MQ7_PIN = 26;     // Analog input pin for MQ-7 sensor
 const int I2C_SDA = 21;     // Common SDA pin for BMP180 and AHT10
 const int I2C_SCL = 22;     // Common SCL pin for BMP180 and AHT10
 
@@ -63,8 +63,8 @@ void loop() {
     before = now;
 
     // Read MG-811 sensor values
-    float mg811Voltage = analogRead(MG811_PIN) * 3.3 / 4095;  // Convert analog value to voltage
-    float CO2_ppm = mg811Voltage * 1000;  // Example conversion factor for MG811
+    float mg811Voltage = analogRead(MG811_PIN) * 3.3 / 4.095;  // Convert analog value to voltage
+    float CO2_ppm = mg811Voltage;  // Example conversion factor for MG811
 
 
     float temperature = bmp.readTemperature();  // Read temperature from BMP180 sensor in Celsius
