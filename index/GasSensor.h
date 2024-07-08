@@ -23,6 +23,7 @@ class GasSensor {
 
     float readConcentration() {
       float rs = readResistance();
+      Serial.printf("rs: %.3f\n",rs);
       float ratio = rs / ro;
       return a * pow(ratio, b);
     }
