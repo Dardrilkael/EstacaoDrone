@@ -55,7 +55,8 @@ Metrics data;
 Config config;
 const char *configFileName = "/config.txt";
 void convertTimeToLocaleDate(long timestamp);
-
+int now =0;
+int before =0;
 #define INTERVAL 4000
 
 void setup() {
@@ -80,15 +81,16 @@ void setup() {
 }
 
 void loop() {
-  int begin = millis();
+  
   timeClient.update();
   int timestamp = timeClient.getEpochTime();
   convertTimeToLocaleDate(timestamp);
 
   float divisor_tensao = 1.0;
   float conversionVoltage = 3.3/4095 * divisor_tensao;
-
-
+  int now = millis();
+  if(now-before>config.interval){
+    before =now;
   int mg811Value = analogRead(MG811_PIN);  // Read analog value from MG811 sensor
   float mg811Voltage = mg811Value*conversionVoltage;  // Convert analog value to voltage
 
@@ -106,9 +108,9 @@ void loop() {
   float RL_VALUE = 20000.0f;
   float Rs = RL_VALUE * ((VC / mq4Voltage) - 1);
   //RO = Rs * ratio;
-  Serial.printf("Voltage: %.2f",mq4Voltage);
-   Serial.printf("RS: %.2f",Rs);
-  float RO=41763;
+  Serial.printf("Voltage: %.2f\n",mq4Voltage);
+   Serial.printf("RS: %.2f\n",Rs);
+  float RO = 17940.3421723;
   float ratio = Rs / RO;
   Serial.println(ratio);
   float a= 997.361;
@@ -134,8 +136,8 @@ void loop() {
   storeMeasurement("/metricas", formatedDateString, trying);
   storeMeasurement("/metricas", formatedDateString, "\n");
   Serial.println(trying);
-  int tempo = millis() - begin;
-  delay((config.interval>tempo)*(config.interval-tempo));
+  
+  }
 
 }
 
