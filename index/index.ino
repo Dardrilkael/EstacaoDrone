@@ -20,8 +20,8 @@ const int I2C_SCL = 22;     // Common SCL pin for BMP180 and AHT10
 Adafruit_BMP085 bmp;    // Create BMP180 instance
 Adafruit_AHTX0 aht;     // Create AHT10 instance
 
-GasSensor mq4Sensor(MQ4_PIN, 997.361, -2.81457, 20000.0, 1, 3.3); // Example parameters for MQ-4 sensor
-GasSensor mq7Sensor(MQ7_PIN, 89.295, -1.58996, 20000.0, 17940.3421723, 3.3); // Example parameters for MQ-7 sensor
+GasSensor mq4Sensor(MQ4_PIN, 997.361, -2.81457, 20000.0, 17940.3421723, 3.3); // Example parameters for MQ-4 sensor
+GasSensor mq7Sensor(MQ7_PIN, 89.295, -1.58996, 20000.0, 1, 3.3); // Example parameters for MQ-7 sensor
 
 
 sensors_event_t humidity, temp; // Sensor data structures for AHT10
